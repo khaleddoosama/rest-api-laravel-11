@@ -26,7 +26,7 @@ class UserController extends Controller
         $limit = $request->input('limit') <= 50 ? $request->input('limit') : 15;
 
         // Paginate and wrap users in a resource collection
-        $users = UserResource::collection(User::paginate(3));
+        $users = UserResource::collection(User::paginate($limit));
 
         // Return users with a 200 HTTP status code
         return $users->response()->setStatusCode(200);
