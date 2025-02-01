@@ -14,7 +14,7 @@ use App\Http\Controllers\EmailController;
 // Protected routes
 Route::group(['prefix' => '/v1'], function () {
     Route::post('/login', [LoginController::class, 'login']);
-    Route::apiResource('/user', UserController::class);
+    Route::apiResource('/user', UserController::class); 
 
     Route::middleware('auth:sanctum')->group(function () {
         // Protect all UserController routes except 'store'
