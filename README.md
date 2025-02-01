@@ -16,10 +16,24 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 please do this steps 
 
 composer install
+<br>
 composer clear-cache
+<br>
+
+
 php artisan key:generate
+
+<br>
 php artisan migrate
+
+<br>
 php artisan db:seed
+
+<br>
  and use for login 
+
+<br>
 superadmin@example.com
+<br>
+
 superadmin123
