@@ -14,20 +14,19 @@ class LessonResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return 
-        [
-            'Author' => $this->user->name,
-            'Title' => $this->title,
-            'Content' => $this->body,
-            'Tags' => $this->tags->map(function ($tag) // solve problem by map function
-            {
-                return 
-                [
-                    'Tag' => $tag->name,
-                   
-                ];
-            }),    
-            // 'Tags'=>TagResource::collection($this->tags) ->will give Time execution Error
-        ];
+        return
+            [
+                'author' => $this->user->name,
+                'title' => $this->title,
+                'content' => $this->body,
+                'tags' => $this->tags->map(function ($tag) // solve problem by map function
+                {
+                    return
+                        [
+                            'tag' => $tag->name,
+                        ];
+                }),
+                // 'Tags'=>TagResource::collection($this->tags) ->will give Time execution Error
+            ];
     }
 }

@@ -15,7 +15,7 @@ class LessonController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -28,14 +28,14 @@ class LessonController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
             $authUser = Auth::user();
             $lessonData = array_merge($request->all(), ['user_id' => $authUser->id]);
             $lesson = Lesson::create($lessonData);
-            if ($request->has('tags')) 
+            if ($request->has('tags'))
             {
                 $lesson->tags()->attach($request->input('tags'));
             }
@@ -48,7 +48,7 @@ class LessonController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -61,7 +61,7 @@ class LessonController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
@@ -79,7 +79,7 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $lesson = Lesson::findOrFail($id);
         $this->authorize('delete', $lesson);
         $lesson->delete();

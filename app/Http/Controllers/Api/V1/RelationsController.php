@@ -16,43 +16,43 @@ use App\Exceptions\CustomException;
 
 class RelationsController extends Controller
 {
-   /**
+    /**
      * Get lessons associated with the user.
      *
-     * @param  int  $id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function userLessons($id)
+    public function userLessons($user_id)
     {
-        $user = User::with('lessons')->findOrFail($id);
-    
+        $user = User::with('lessons')->findOrFail($user_id);
+
         // if (!$user) {
-        //     throw new CustomException("User with ID {$id} not found");
+        //     throw new CustomException("User with ID {$user_id} not found");
         // }
-    
+
         $lessons = $user->lessons->map(function ($lesson) {
             return [
                 'Title' => $lesson->title,
                 'Content' => $lesson->body,
             ];
         });
-    
+
         return response()->json([
             'data' => $lessons,
         ], 200);
     }
-    
 
 
-  /**
+
+    /**
      * Get tags associated with the lesson.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $lesson_id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function lessonTags($id)
+    public function lessonTags($lesson_id)
     {
-        $lesson = Lesson::with('tags')->findOrFail($id);
+        $lesson = Lesson::with('tags')->findOrFail($lesson_id);
         $tags = $lesson->tags->map(function ($tag) {
             return [
                 'Tag' => $tag->name,
@@ -64,15 +64,15 @@ class RelationsController extends Controller
         ], 200);
     }
 
-/**
+    /**
      * Get lessons associated with the tag.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $tag_id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function tagLessons($id)
+    public function tagLessons($tag_id)
     {
-        $tag = Tag::with('lessons')->findOrFail($id);
+        $tag = Tag::with('lessons')->findOrFail($tag_id);
         $lessons = $tag->lessons->map(function ($lesson) {
             return [
                 'Title' => $lesson->title,

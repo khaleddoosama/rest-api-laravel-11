@@ -14,9 +14,9 @@ class TagResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'Name'=>$this->name,
-            'Lessons'=>LessonResource::collection($this->lessons),
+            'name'=>$this->name,
+            'lessons'=>LessonResource::collection($this->lessons),
            ];
     }
-    
+
 }
